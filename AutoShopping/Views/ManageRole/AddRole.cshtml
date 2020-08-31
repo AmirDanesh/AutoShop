@@ -1,0 +1,22 @@
+﻿@model RoleViewModel
+@{
+    ViewData["Title"] = "مدیریت نقش ها";
+}
+
+    <div class="col-6" style="margin: 0 auto">
+        <div class="card text-center">
+            <form asp-controller="ManageRole" asp-action="AddRole" method="post">
+
+                <div class="card-header">
+                    <p>ایجاد نقش جدید</p>
+                </div>
+                <div class="card-body">
+                    <label asp-for="@Model.Name" class="mt-2"></label>
+                    <input class="form-control col-9 float-left" type="text" asp-for="@Model.Name" />
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-success col-5">ثبت</button>
+                </div>
+            </form>
+        </div>
+    </div>

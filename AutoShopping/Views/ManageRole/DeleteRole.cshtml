@@ -1,0 +1,22 @@
+﻿@model RoleViewModel
+@{
+    ViewData["Title"] = "مدیریت نقش ها";
+}
+
+<div class="col-6" style="margin: 0 auto">
+    <div class="card text-center">
+        <form asp-controller="ManageRole" asp-action="DeleteRole" asp-route-id="@Model.Id" method="post">
+
+            <div class="card-header">
+                <p>حذف نقش</p>
+            </div>
+            <div class="card-body">
+                <label asp-for="@Model.Name" class="mt-2"></label>
+                <input class="form-control col-9 float-left" type="text" asp-for="@Model.Name" readonly/>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-danger col-5">حذف نقش</button>
+            </div>
+        </form>
+    </div>
+</div>

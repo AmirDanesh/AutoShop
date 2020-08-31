@@ -1,0 +1,45 @@
+﻿@model List<IdentityRole>
+@{
+    ViewData["Title"] = "مدیریت نقش ها";
+    int i = 1;
+}
+
+<a asp-controller="ManageRole" asp-action="AddRole" class="btn btn-primary mt-4">اضافه کردن نقش</a>
+<br />
+<br />
+@if (!Model.Any())
+{
+    <h5 class="bg-info mt-5 p-5 text-center text-white" style="border-radius: 10px;">مقامی یافت نشد</h5>
+}
+else
+{
+    <table class="table table-bordered table-striped text-center" dir="rtl">
+        <thead>
+            <tr>
+                <th>ردیف</th>
+                <th>نام نقش (انگلیسی)</th>
+                <th>عملیات</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@i</td>
+                    <td>@item.Name</td>
+                    <td>
+                        <form class="dis-inline" asp-controller="ManageRole" asp-action="DeleteRole" asp-route-id="@item.Id" method="get">
+                            <button type="submit"><i class="fa fa-trash-alt text-danger"></i></button>
+                        </form>
+                        |
+                        <form class="dis-inline" asp-controller="ManageRole" asp-action="EditRole" asp-route-id="@item.Id" method="get">
+                            <button type="submit"><i class="fa fa-edit text-success"></i></button>
+                        </form>
+                    </td>
+                </tr>
+                i++;
+            }
+        </tbody>
+    </table>
+}
+

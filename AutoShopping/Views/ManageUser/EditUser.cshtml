@@ -1,0 +1,25 @@
+﻿@model UserViewModel
+@{
+    ViewData["Title"] = "مدیریت کاربران";
+}
+
+<div class="col-6" style="margin: 0 auto">
+    <div class="card text-center">
+        <form asp-controller="ManageUser" asp-action="EditUser" method="post">
+
+            <div class="card-header">
+                <p>ویرایش اطلاعات کاربر</p>
+            </div>
+            <div class="card-body text-center">
+                <label asp-for="@Model.UserName" class="mt-2 mr-2"></label>
+                <input class="form-control col-9 float-left" type="text" asp-for="@Model.UserName" />
+                <br /><br />
+                <label asp-for="@Model.Email" class="mt-2 mr-2"></label>
+                <input class="form-control col-9 float-left" type="text" asp-for="@Model.Email" />
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-success col-5">ثبت تغییرات</button>
+            </div>
+        </form>
+    </div>
+</div>

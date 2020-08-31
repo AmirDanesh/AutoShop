@@ -1,0 +1,32 @@
+﻿@model BrandViewModel
+@{
+    ViewData["Title"] = "مدیریت برند ها";
+}
+
+<div class="col-10 bg-white mt-3 p-3 shadow">
+    <form asp-area="Admin" asp-controller="Brand" asp-action="DeleteBrand" method="post" enctype="multipart/form-data">
+        <div class="row form-group">
+            <div class="col-4 text-right">
+                <label asp-for="@Model.BrandName"></label>
+                <input type="text" asp-for="@Model.BrandName" class="form-control" />
+                <span asp-validation-for="@Model.BrandName" class="text-danger"></span>
+            </div>
+            <div class="mt-3">
+                @{
+                    if (Model.LogoFileName != null)
+                    {
+                        <img class="img-thumbnail" style="width: 200px; height: 200px; object-fit: contain;" src="~/GalleryFile/Brand/@Model.LogoFileName" />
+                    }
+                    else
+                    {
+                        <img class="img-thumbnail" style="width: 200px; height: 200px; object-fit: contain;" src="~/Images/DefaultCar.png" />
+                    }
+                }
+            </div>
+            <div class="col-12">
+                <input type="submit" class="btn btn-success" value="حذف" />
+                <a asp-area="Admin" asp-controller="Brand" asp-action="Index" class="btn btn-danger">انصراف</a>
+            </div>
+        </div>
+    </form>
+</div>

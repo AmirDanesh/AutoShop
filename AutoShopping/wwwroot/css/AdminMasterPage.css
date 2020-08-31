@@ -1,0 +1,68 @@
+﻿body {
+    background-color: #F1F4F8;
+}
+
+.toolsMenu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    background-color: #2B333E;
+    color: #91a7c6;
+}
+
+.borderButtom {
+    border-bottom: 3px solid #43C7D7;
+}
+
+.backgroundSelect {
+    background-color: #5a5a5a;
+    font-size: 22px;
+}
+
+.user img{
+    width: 50%;
+}
+
+.user h5 {
+    color: #30b5e1 !important;
+}
+
+.menu {
+    border-top: 1px solid;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+
+    .menu a {
+        color: #91A7C6 !important;
+    }
+
+    .menu > li a {
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+        line-height: 3;
+        text-align: center;
+    }
+
+    .menu > li > ul > li > a {
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+        line-height: 2;
+        text-align: center;
+        color: #abb7c7 !important;
+    }
+
+.menu > li {
+    font-size: 22px;
+}
+
+    .menu > li > ul {
+        font-size: 18px;
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+    }

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<ModelViewModel>
+@{
+    ViewData["Title"] = "مدیریت مدل ها";
+}
+
+<style>
+    tbody tr td{
+        vertical-align: middle !important;
+    }
+</style>
+
+<div class="col-10 text-left">
+    <a class="btn btn-outline-info mt-2" style="color: #000 !important;" asp-area="Admin" asp-controller="Model" asp-action="AddModel">افزودن مدل جدید</a>
+</div>
+<div class="col-10 bg-white mt-3 shadow">
+    <table class="table table-striped table-borderless text-center mt-1">
+        <thead>
+            <tr>
+                <th>کد مدل</th>
+                <th>نام مدل</th>
+                <th>برند</th>
+                <th>عملیات</th>
+            </tr>
+        </thead>
+        <tbody >
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.ID</td>
+                    <td>@item.ModelName</td>
+                    <td>
+                        @{
+                            if (item.BrandLogo != null)
+                            {
+                                <img class="img-thumbnail" style="width: 100px; height: 100px; object-fit: contain;" src="~/GalleryFile/Brand/@item.BrandLogo" />
+                                <br />
+                                <span>@item.BrandName</span>
+                            }
+                            else
+                            {
+                                <img class="img-thumbnail" style="width: 100px; height: 100px; object-fit: contain;" src="~/Images/DefaultCar.png" />
+                            }
+                        }
+                    </td>
+                    <td>
+                        <a asp-area="Admin" asp-controller="Model" asp-action="EditModel" asp-route-id="@item.ID">ویرایش</a>
+                        <span>|</span>
+                        <a asp-area="Admin" asp-controller="Model" asp-action="DeleteModel" asp-route-id="@item.ID">حذف</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,57 @@
+﻿@model AutoShopping.Models.ViewModel.Account.RegisterViewModel
+
+@{
+    ViewData["Title"] = "ثبت نام";
+}
+
+<div class="row">
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100">
+                <form class="login100-form validate-form p-l-55 p-r-55 p-t-178"
+                      asp-controller="Account" asp-action="Register" method="post" autocomplete="off">
+                    <span class="login100-form-title">
+                        ثبت نام در سایت
+                    </span>
+
+                    <div asp-validation-summary="ModelOnly" class="mb-4 mr-3 text-right text-danger"></div>
+
+                    <div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
+                        <input class="input100" type="text" asp-for="@Model.UserName" placeholder="نام کاربری">
+                        <span class="focus-input100"></span>
+                        <span asp-validation-for="@Model.UserName" class="dis-block text-right mr-5"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
+                        <input class="input100" type="text" asp-for="@Model.Email" placeholder="ایمیل">
+                        <span class="focus-input100"></span>
+                        <span asp-validation-for="@Model.Email" class="dis-block text-right mr-5"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input m-b-16" data-validate="Please enter password">
+                        <input class="input100" type="password" asp-for="@Model.Password" placeholder="رمز عبور">
+                        <span class="focus-input100"></span>
+                        <span asp-validation-for="@Model.Password" class="dis-block text-right mr-5"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Please enter password">
+                        <input class="input100" type="password" asp-for="@Model.ConfirmPassword" placeholder="تکرار رمز عبور">
+                        <span class="focus-input100"></span>
+                        <span asp-validation-for="@Model.ConfirmPassword" class="dis-block text-right mr-5"></span>
+                    </div>
+
+                    <div class="container-login100-form-btn">
+                        <button class="btn-hover color-7">
+                            ثبت نام
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{ 
+@{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

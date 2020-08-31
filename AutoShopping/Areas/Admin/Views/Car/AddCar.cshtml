@@ -1,0 +1,98 @@
+﻿@model CarViewModel
+@{
+    ViewData["Title"] = "مدیریت ماشین ها";
+}
+
+<link href="~/lib/FileUpload/image-uploader.min.css" rel="stylesheet" />
+
+<div class="col-10 bg-white mt-3 p-3 shadow">
+    <form asp-area="Admin" asp-controller="Car" asp-action="AddCar" method="post" enctype="multipart/form-data">
+        <div class="row form-group">
+            <div class="col-4 text-right">
+                <label asp-for="@Model.CategoryId"></label>
+                <select asp-for="@Model.CategoryId" class="form-control">
+                    <option value="">انتخاب کنید...</option>
+                    <option value="1">سدان</option>
+                    <option value="2">استیشن</option>
+                    <option value="3">کوپه</option>
+                    <option value="4">شاسی بلند</option>
+                </select>
+                <span asp-validation-for="@Model.CategoryId" class="text-danger"></span>
+            </div>
+            <div class="col-4 text-right">
+                <label asp-for="@Model.ColorId"></label>
+                <select asp-for="@Model.ColorId" asp-items="@Model.ColorList" class="form-control">
+                    <option value="">انتخاب کنید...</option>
+                </select>
+                <span asp-validation-for="@Model.ColorId" class="text-danger"></span>
+            </div>
+            <div class="col-4 text-right">
+                <label asp-for="@Model.BrandId"></label>
+                <select id="Brand" asp-for="@Model.BrandId" asp-items="@Model.BrandList" class="form-control" onchange="filterModelList()">
+                    <option value="">انتخاب کنید...</option>
+                </select>
+                <span asp-validation-for="@Model.BrandId" class="text-danger"></span>
+            </div>
+            <div class="col-4 text-right">
+                <label asp-for="@Model.ModelId"></label>
+                <select id="Model" asp-for="@Model.ModelId" asp-items="@Model.ModelList" class="form-control">
+                    <option value="">انتخاب کنید...</option>
+                </select>
+                <span asp-validation-for="@Model.ModelId" class="text-danger"></span>
+            </div>
+            <div class="col-4 text-right">
+                <label asp-for="@Model.Price"></label>
+                <input type="number" asp-for="@Model.Price" class="form-control" value="" />
+                <span asp-validation-for="@Model.Price" class="text-danger"></span>
+            </div>
+            <div class="col-4 text-right">
+                <label asp-for="@Model.Quantity"></label>
+                <input type="number" asp-for="@Model.Quantity" class="form-control" value="" />
+                <span asp-validation-for="@Model.Quantity" class="text-danger"></span>
+            </div>
+            <div class="col-4 text-right">
+                <label asp-for="@Model.CreateDate"></label>
+                <input type="date" asp-for="@Model.CreateDate" class="form-control" value="" />
+                <span asp-validation-for="@Model.CreateDate" class="text-danger"></span>
+            </div>
+            <div class="col-4">
+                <label asp-for="@Model.CarImages"></label> <br />
+                <div class="input-images"></div>
+            </div>
+            <div class="col-12">
+                <input type="submit" class="btn btn-success" value="افزودن" />
+                <a asp-area="Admin" asp-controller="Car" asp-action="Index" class="btn btn-danger">انصراف</a>
+            </div>
+        </div>
+    </form>
+</div>
+@section Scripts{
+    <script src="~/lib/FileUpload/image-uploader.js"></script>
+    <script>
+        function filterModelList() {
+            var brand = $("#Brand");
+            $.ajax({
+                url: "/Admin/Car/FilterModels",
+                type: "get",
+                data: {
+                    brand: brand.val(),
+                },
+                success: function (result) {
+                    var data = JSON.parse(result)
+
+                    var model = $("#Model");
+                    model.empty();
+                    model.append('<option value="">انتخاب کنید...</option>');
+                    for (var i = 0; i < data.length; i++) {
+                        model.append('<option value="' + data[i].ID + '">' + data[i].ModelName + '</option>')
+                    }
+
+                    $("#Model").removeAttr('disabled');
+                }
+
+            });
+        }
+
+        $('.input-images').imageUploader();
+    </script>
+}

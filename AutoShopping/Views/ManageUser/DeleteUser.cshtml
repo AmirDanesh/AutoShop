@@ -1,0 +1,28 @@
+﻿@model UserViewModel
+@inject UserManager<IdentityUser> _UserManager
+@{
+    ViewData["Title"] = "مدیریت کاربران";
+    var user = await _UserManager.FindByIdAsync(Model.Id);
+}
+
+<div class="col-6" style="margin: 0 auto">
+    <div class="card text-center">
+        <form asp-controller="ManageUser" asp-action="DeleteUser" method="post">
+
+            <div class="card-header" dir="rtl">
+                <p>حذف کاربر: @user.UserName</p>
+            </div>
+            <div class="card-body text-center">
+                <label asp-for="@Model.UserName" class="mt-2 mr-2"></label>
+                <input class="form-control col-9 float-left" type="text" asp-for="@Model.UserName" readonly/>
+                <br /><br />
+                <label asp-for="@Model.Email" class="mt-2 mr-2"></label>
+                <input class="form-control col-9 float-left" type="text" asp-for="@Model.Email" readonly/>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-danger col-5">حذف کاربر</button>
+            </div>
+        </form>
+    </div>
+</div>
+

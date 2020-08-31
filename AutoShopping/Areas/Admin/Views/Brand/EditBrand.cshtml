@@ -1,0 +1,70 @@
+﻿@model BrandViewModel
+@{
+    ViewData["Title"] = "مدیریت برند ها";
+}
+
+<style>
+    .file {
+        visibility: hidden;
+        position: absolute;
+    }
+</style>
+
+<div class="col-10 bg-white mt-3 p-3 shadow">
+    <form asp-area="Admin" asp-controller="Brand" asp-action="EditBrand" method="post" enctype="multipart/form-data">
+        <div class="row form-group" style="line-height:3;">
+            <div class="col-4 text-right">
+                <label asp-for="@Model.BrandName"></label>
+                <input type="text" asp-for="@Model.BrandName" class="form-control" />
+                <span asp-validation-for="@Model.BrandName" class="text-danger"></span>
+            </div>
+            <div class="col-3 text-center">
+                <label asp-for="@Model.LogoImg"></label> <br />
+                @{
+                    if (Model.LogoFileName != null)
+                    {
+                        <img style="width: 200px; height: 200px; object-fit: contain;" src="~/GalleryFile/Brand/@Model.LogoFileName" id="preview" class="img-thumbnail">
+                    }
+                    else
+                    {
+                        <img style="width: 200px; height: 200px; object-fit: contain;" id="preview" src="~/Images/DefaultCar.png" />
+                    }
+                }<br />
+                <input id="img" type="file" class="file" accept="image/*" asp-for="@Model.LogoImg">
+                <button type="button" class="browse btn btn-primary">تغییر...</button>
+                <a class="btn btn-warning" onclick="removeImg()">حذف عکس</a>
+                <span asp-validation-for="@Model.LogoImg" class="text-danger"></span>
+            </div>
+            <div class="col-12">
+                <input type="submit" class="btn btn-success" value="ثبت تغییرات" />
+                <a asp-area="Admin" asp-controller="Brand" asp-action="Index" class="btn btn-danger">انصراف</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).on("click", ".browse", function () {
+            var file = $(this).parents().find(".file");
+            file.trigger("click");
+        });
+        $('input[type="file"]').change(function (e) {
+            var fileName = e.target.files[0].name;
+            $("#file").val(fileName);
+
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                // get loaded data and render thumbnail.
+                document.getElementById("preview").src = e.target.result;
+            };
+            // read the image file as a data URL.
+            reader.readAsDataURL(this.files[0]);
+        });
+
+        function removeImg() {
+            $("#img").val("");
+            $("#preview").attr("src", "/Images/DefaultCar.png");
+        }
+    </script>
+}

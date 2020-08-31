@@ -1,0 +1,47 @@
+﻿@model AddUserToRoleViewModel
+@inject UserManager<IdentityUser> _UserManager
+@{
+    ViewData["Title"] = "مدیریت کاربران";
+    var user = await _UserManager.FindByIdAsync(Model.UserId);
+}
+
+@if (!Model.UserRoles.Any())
+{
+    <h5 class="bg-info mt-5 p-5 text-center text-white" style="border-radius: 10px;">هیچ مقامی یافت نشد</h5>
+}
+else
+{
+    <form asp-controller="ManageUser" asp-action="AddUserToRole" method="post">
+
+        <div class="col-6" style="margin: 0 auto">
+            <div class="card text-center">
+                <div class="card-header" dir="rtl">
+                    <p>اضافه کردن نقش به کاربر: @user.UserName</p>
+                </div>
+                <div class="card-body">
+                    <div asp-validation-summary="ModelOnly"></div>
+
+                    @for (int i = 0; i < Model.UserRoles.Count; i++)
+                    {
+                        <div class="col-3 dis-inline-block form-group">
+                            @if (Model.UserRoles[i].IsSelected)
+                            {
+                                <input asp-for="@Model.UserRoles[i].IsSelected" disabled />
+                            }
+                            else
+                            {
+                                <input asp-for="@Model.UserRoles[i].IsSelected" />
+                            }
+                            <label>@Model.UserRoles[i].RoleName</label>
+                            <input type="hidden" asp-for="@Model.UserRoles[i].RoleName" />
+                        </div>
+                    }
+                </div>
+                <div class="card-footer">
+                    <input type="hidden" asp-for="@Model.UserId" />
+                    <button class="btn btn-success col-5" type="submit">ثبت</button>
+                </div>
+            </div>
+        </div>
+    </form>
+}

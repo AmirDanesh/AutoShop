@@ -1,0 +1,56 @@
+﻿@model List<UserViewModel>
+@{
+    ViewData["Title"] = "مدیریت کاربران";
+    int i = 1;
+}
+
+
+@if (!Model.Any())
+{
+    <h5 class="bg-info mt-5 p-5 text-center text-white" style="border-radius: 10px;">کاربری یافت نشد</h5>
+}
+else
+{
+    <table class="table table-bordered table-striped text-center" dir="rtl">
+        <thead>
+            <tr>
+                <th>ردیف</th>
+                <th>نام کاربری</th>
+                <th>ایمیل</th>
+                <th>عملیات</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@i</td>
+                    <td>@item.UserName</td>
+                    <td>@item.Email</td>
+                    <td>
+                        <a asp-controller="ManageUser" asp-action="AddUserToRole" asp-route-id="@item.Id" title="اضافه کردن نقش"
+                           data-toggle="tooltip" data-placement="top"><i class="fa fa-users text-primary"></i></a>
+                        |
+                        <a asp-controller="ManageUser" asp-action="RemoveUserFromRole" asp-route-id="@item.Id" title="حذف نقش"
+                           data-toggle="tooltip" data-placement="top"><i class="fa fa-users text-danger"></i></a>
+                        |
+                        <a asp-controller="ManageUser" asp-action="EditUser" asp-route-id="@item.Id" title="ویرایش اطلاعات کاربر"
+                           data-toggle="tooltip" data-placement="top"><i class="fa fa-edit text-success"></i></a>
+                        |
+                        <a asp-controller="ManageUser" asp-action="DeleteUser" asp-route-id="@item.Id" title="حذف کاربر"
+                           data-toggle="tooltip" data-placement="top"><i class="fa fa-trash-alt text-danger"></i></a>
+                    </td>
+                </tr>
+                i++;
+            }
+        </tbody>
+    </table>
+}
+
+@section Scripts{
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+}

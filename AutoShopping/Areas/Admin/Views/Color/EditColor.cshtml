@@ -1,0 +1,26 @@
+﻿@model ColorViewModel
+@{
+    ViewData["Title"] = "مدیریت رنگ ها";
+}
+
+
+<div class="col-10 bg-white mt-3 p-3 shadow">
+    <form asp-area="Admin" asp-controller="Color" asp-action="EditColor" method="post">
+        <div class="row form-group">
+            <div class="col-4 text-right">
+                <label asp-for="@Model.ColorName"></label>
+                <input type="text" asp-for="@Model.ColorName" class="form-control" />
+                <span asp-validation-for="@Model.ColorName" class="text-danger"></span>
+            </div>
+            <div class="col-4 text-right">
+                <label asp-for="@Model.ColorCode"></label>
+                <input type="color" asp-for="@Model.ColorCode" class="form-control col-2" />
+                <span asp-validation-for="@Model.ColorCode" class="text-danger"></span>
+            </div>
+            <div class="col-12">
+                <input type="submit" class="btn btn-success" value="ویرایش" />
+                <a asp-area="Admin" asp-controller="Color" asp-action="Index" class="btn btn-danger">انصراف</a>
+            </div>
+        </div>
+    </form>
+</div>

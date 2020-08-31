@@ -1,0 +1,27 @@
+﻿@model ModelViewModel
+@{
+    ViewData["Title"] = "مدیریت مدل ها";
+}
+
+<div class="col-10 bg-white mt-3 p-3 shadow">
+    <form asp-area="Admin" asp-controller="Model" asp-action="EditModel" method="post">
+        <div class="row form-group">
+            <div class="col-4 text-right">
+                <label asp-for="@Model.ModelName"></label>
+                <input type="text" asp-for="@Model.ModelName" class="form-control" />
+                <span asp-validation-for="@Model.ModelName" class="text-danger"></span>
+            </div>
+            <div class="col-4 text-right">
+                <label asp-for="@Model.BrandID"></label>
+                    <select asp-for="@Model.BrandID" asp-items="@Model.BrandList" class="form-control">
+                        <option value="">انتخاب کنید ...</option>
+                    </select>
+                <span asp-validation-for="@Model.BrandID" class="text-danger"></span>
+            </div>
+            <div class="col-12">
+                <input type="submit" class="btn btn-success" value="افزودن" />
+                <a asp-area="Admin" asp-controller="Model" asp-action="Index" class="btn btn-danger">انصراف</a>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,50 @@
+﻿@model IEnumerable<BrandViewModel>
+@{
+    ViewData["Title"] = "مدیریت برند ها";
+
+    var resutl = ViewBag.success;
+}
+
+<div class="col-10 text-left">
+    <a class="btn btn-outline-info mt-2" style="color: #000 !important;" asp-area="Admin" asp-controller="Brand" asp-action="AddBrand">افزودن برند جدید</a>
+</div>
+
+
+<div class="col-10 bg-white mt-3 mb-5 shadow">
+    <table class="table table-striped table-borderless text-center mt-1">
+        <thead>
+            <tr>
+                <th>کد برند</th>
+                <th>عکس</th>
+                <th>نام برند</th>
+                <th>عملیات</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr style="line-height:7">
+                <td>@item.ID</td>
+                <td>
+                    @{
+                        if (item.LogoFileName != null)
+                        {
+                            <img class="img-thumbnail" style="width: 100px; height: 100px; object-fit: contain;" src="~/GalleryFile/Brand/@item.LogoFileName" />
+                        }
+                        else
+                        {
+                            <img class="img-thumbnail" style="width: 100px; height: 100px; object-fit: contain;" src="~/Images/DefaultCar.png" />
+                        }
+                    }
+                </td>
+                <td>@item.BrandName</td>
+                <td>
+                    <a asp-area="Admin" asp-controller="Brand" asp-action="EditBrand" asp-route-id="@item.ID">ویرایش</a>
+                    <span>|</span>
+                    <a asp-area="Admin" asp-controller="Brand" asp-action="DeleteBrand" asp-route-id="@item.ID">حذف</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
