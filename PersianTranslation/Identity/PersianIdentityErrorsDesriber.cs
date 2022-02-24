@@ -11,7 +11,7 @@ namespace PersianTranslation.Identity
             => new IdentityError()
             {
                 Code = nameof(DuplicateEmail),
-                Description = $"ایمیل '{email}' قبلا توسط شخص دیگری انتخاب شده است"
+                Description = $"mahsa '{email}' قبلا توسط شخص دیگری انتخاب شده است"
             };
 
         public override IdentityError InvalidUserName(string userName)
